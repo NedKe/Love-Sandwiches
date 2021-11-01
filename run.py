@@ -118,6 +118,13 @@ def calculate_stock_data(data):
 
     return new_stock_data
 
+def get_stock_values(data):
+    headings = SHEET.worksheet("stock").row_values(1)
+    stock_values = {}
+    for idx, heading in enumerate(headings):
+        stock_values[heading] = data[idx]
+    return stock_values
+    #return {heading: data for heading, data in zip(headings, data)}
 
 def main():
     """
@@ -132,6 +139,9 @@ def main():
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
 
+    stock_values = get_stock_values(stock_data)
+    print(stock_values)
 
-print("Welcome to Love Sandwiches Data Automation")
+
+print("Welcome to Love Sandwiches Data Automation\n")
 main()
